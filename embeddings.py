@@ -36,13 +36,9 @@ print("Chunk metadata saved as chunks_metadata.pkl")
 # Step 6: Example search function
 
 def search(query, top_k=3):
-    # Encode query
+
     query_vec = model.encode([query], convert_to_numpy=True)
-
-    # Ensure float32 for FAISS
     query_vec = np.array(query_vec, dtype=np.float32)
-
-    # Search FAISS
     D, I = index.search(query_vec, top_k)
 
     results = []
@@ -53,8 +49,8 @@ def search(query, top_k=3):
 
 # Example usage
 if __name__ == "__main__":
-    query = "What is liquidity in stock market?"
+    query = "How is a bull market different from a bear market?"
     results = search(query)
     for r in results:
         print(
-            f"Page {r['page']} | Chunk {r['chunk_id']}: {r['text'][:150]}...\n")
+            f"Page {r['page']} | Chunk {r['chunk_id']}: {r['text']}...\n")
